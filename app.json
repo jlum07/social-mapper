@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Insta Buddy",
+    "version": "0.1.0",
+    "slug": "insta-buddy",
+    "sdkVersion": "27.0.0",
+  },
+  "android": {
+    "package": "com.jlum.insta-buddy"
+  }
+}
