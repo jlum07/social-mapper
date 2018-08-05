@@ -73,7 +73,7 @@ class MapScreen extends React.Component {
       }
     })
 
-    console.log(posts);
+    // console.log(posts);
 
   }
 
@@ -85,7 +85,8 @@ class MapScreen extends React.Component {
         showsUserLocation={ true }
         region={ this.state.region }
         // onLongPress={ (event) => this.getInstagrams(event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude) }
-        onLongPress={ (e) => this.props.navigation.navigate('Insta', {lat: e.nativeEvent.coordinate.latitude, lng: e.nativeEvent.coordinate.longitude}) }
+        onPress={ (e) => this.props.navigation.navigate('Insta', {lat: e.nativeEvent.coordinate.latitude, lng: e.nativeEvent.coordinate.longitude}) }
+        onLongPress={ (e) => this.props.navigation.navigate('Locations', {lat: e.nativeEvent.coordinate.latitude, lng: e.nativeEvent.coordinate.longitude}) }
       >
 
       </MapView>

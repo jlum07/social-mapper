@@ -4,8 +4,16 @@
     "version": "0.1.0",
     "slug": "insta-buddy",
     "sdkVersion": "27.0.0",
+    "androidStatusBarColor": "#334393",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#334393"
+    }
   },
   "android": {
-    "package": "com.jlum.insta-buddy"
+    "package": "com.jlum.insta-buddy",
+    "permissions": [
+      "ACCESS_FINE_LOCATION"
+    ]
   }
 }

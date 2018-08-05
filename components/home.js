@@ -10,7 +10,7 @@ class HomeScreen extends React.Component {
     return (
       <View style={styles.container} >
         <Text style={styles.title} >Welcome to Insta Buddy!</Text>
-        <Text style={styles.description} >Long press on map map location to explore.</Text>
+        <Text style={styles.description} > Tap on map to view or long press to see nearby locations.</Text>
         <Button
           style={ styles.homeButton }
           title="Start Exploring"
