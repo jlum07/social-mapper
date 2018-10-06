@@ -8,6 +8,8 @@ import LocationsScreen from './components/locations';
 import InstaScreen from './components/insta';
 import InstaCardsScreen from './components/instaCards';
 
+import MapTestScreen from './components/MapTest';
+
 export default class App extends React.Component {
 
   static navigationOptions = {
@@ -33,6 +35,7 @@ const RootStack = createStackNavigator(
     Locations: LocationsScreen,
     Insta: InstaScreen,
     InstaCards: InstaCardsScreen,
+    MapTest: MapTestScreen,
   },
   {
     headerMode: 'none',
