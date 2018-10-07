@@ -6,6 +6,9 @@ import HomeScreen from './components/home';
 import MapScreen from './components/map';
 import LocationsScreen from './components/locations';
 import InstaScreen from './components/insta';
+import InstaCardsScreen from './components/instaCards';
+
+import MapTestScreen from './components/MapTest';
 
 export default class App extends React.Component {
 
@@ -31,6 +34,8 @@ const RootStack = createStackNavigator(
     Map: MapScreen,
     Locations: LocationsScreen,
     Insta: InstaScreen,
+    InstaCards: InstaCardsScreen,
+    MapTest: MapTestScreen,
   },
   {
     headerMode: 'none',

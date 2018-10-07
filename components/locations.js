@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, Button } from 'react-native';
+import { Container, Content, List, ListItem, Left, Right, Text, Icon } from 'native-base';
 import { createStackNavigator } from 'react-navigation';
+import axios from 'axios';
 
 class LocationsScreen extends React.Component {
 
   static navigationOptions = { header: null };
 
   constructor(props) {
+
     super(props);
 
+    this.state = {
+      locations: []
+    }
+
     this.getLocations = this.getLocations.bind(this);
+
   }
 
-  getLocations (lat, lng) {
+  async componentDidMount() {
+    let locationsList = await this.getLocations(this.props.navigation.state.params.lat, this.props.navigation.state.params.lng);
+
+    this.setState({ locations: locationsList });
+  }
+
+  async getLocations(lat, lng) {
 
     let locationResponse = await axios.get('https://api.instagram.com/v1/locations/search?', {
       params: {
@@ -22,34 +36,42 @@ class LocationsScreen extends React.Component {
       }
     })
 
-    let locationSort = locationResponse.sort(function(prev, curr) {
+    // console.log(locationResponse.data.data);
+
+    let locationSort = locationResponse.data.data.sort(function(prev, curr) {
       // return ((Math.abs(curr.latitude - lat) + Math.abs(curr.longitude - lng)) < (Math.abs(prev.latitude - lat) + Math.abs(prev.longitude - lng)) ? curr : prev);
-      return (Math.sqrt(Math.pow(Math.abs(curr.latitude - lat), 2)) + Math.pow(Math.abs(curr.longitude - lng), 2) < Math.sqrt(Math.pow(Math.abs(prev.latitude - lat), 2) + Math.pow(Math.abs(prev.longitude - lng), 2)) ? -1 : 1);
+      return (Math.sqrt(Math.pow(Math.abs(curr.latitude - lat), 2)) + Math.pow(Math.abs(curr.longitude - lng), 2) < Math.sqrt(Math.pow(Math.abs(prev.latitude - lat), 2) + Math.pow(Math.abs(prev.longitude - lng), 2)) ? 1 : -1);
     });
+
+    console.log(locationSort);
 
     return locationSort;
 
   }
 
-  async componentDidMount() {
-
-    locationsList = await getLocations(this.props.navigation.state.params.lat, this.props.navigation.state.params.lng);
-
-
-  }
-
-
   render() {
+
+    let displayList = this.state.locations.map((location) => {
+      return (
+        <ListItem noIndent button={true} onPress={ () => this.props.navigation.navigate('InstaCards', { location: location })} >
+          <Left>
+            <Text>{location.name}</Text>
+          </Left>
+          <Right>
+            <Icon name="arrow-forward" />
+          </Right>
+        </ListItem >
+      )
+    })
+
     return (
-      <View style={styles.container} >
-        <Text style={styles.title} >Welcome to Insta Buddy!</Text>
-        <Text style={styles.description} >Long press on map map location to explore.</Text>
-        <Button
-          style={ styles.homeButton }
-          title="Start Exploring"
-          onPress={() => this.props.navigation.navigate('Map')}
-        />
-      </View>
+      <Container>
+        <Content>
+          <List>
+            {displayList}
+          </List>
+        </Content>
+      </Container>
     );
   }
 }
@@ -67,19 +89,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 30,
-    color: '#fff',
-    marginBottom: 100
-  },
-  description: {
-    fontSize: 20,
-    color: '#fff',
-    marginBottom: 100
-  },
-  homeButton: {
-    color: 'red',
-    padding: 20,
-  }
 });
-
