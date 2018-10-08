@@ -97,7 +97,7 @@ class InstaScreen extends React.Component {
   get caption () {
       const { images, index } = this.state;
       return (
-          <View style={{ bottom: 0, minHeight: 65, height: 'auto', backgroundColor: 'rgba(0, 0, 0, 0.5)', width: '100%', position: 'absolute', justifyContent: 'center' }}>
+          <View style={{ bottom: 0, minHeight: 65, maxHeight: 300, height: 'auto', backgroundColor: 'rgba(0, 0, 0, 0.5)', width: '100%', position: 'absolute', justifyContent: 'center' }}>
               <Text style={{ textAlign: 'center', color: 'white', fontSize: 15, fontStyle: 'italic' }}>{ (images[index] && images[index].caption) || '' } </Text>
           </View>
       );
